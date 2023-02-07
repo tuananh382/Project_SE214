@@ -284,8 +284,6 @@ h1 {
   color: var(--glow-color);
   cursor: pointer;
   padding: 0.35em 1.5em;
-  margin-top: 1em ;
-  margin-bottom: 1em;
   border: 0.15em solid var(--glow-color);
   border-radius: 0.5em;
   background: none;

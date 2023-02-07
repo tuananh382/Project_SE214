@@ -311,12 +311,16 @@ function App() {
   function Notice() {
     // if(win == winner)
     //   socketRef.current.emit("namewin", myname)
+    function reload() {
+      window.location.reload(true)
+      socketRef.current.emit("reload", [roomname, myname])
+    }
     return (
       <div className="notification">
         {/* {clearInterval(Ref.current)} */}
         {/* <h1>{timer}</h1> */}
         <span class='glowing-txt noti'>{win === winner ? "You win" : "You lose"}</span>
-          <button className='glowing-btn ok' onClick={() => { window.location.reload(true) }}>Again</button>
+          <button className='glowing-btn ok' onClick={() => reload()}>Again</button>
       </div>
       
     )
@@ -381,12 +385,6 @@ function App() {
     setShownoti("no")
   }
   function Play() {
-    socketRef.current.on("yourname", function (data) {
-      if (data[0] != myname)
-        setYourname(data[0])
-      else
-        setYourname(data[1])
-    })
     socketRef.current.on("full", function (data) {
       if (yourname === "") {
         setPlaygame("no")
@@ -394,6 +392,16 @@ function App() {
       }
       else
         setPlaygame("yes")
+    })
+    socketRef.current.on("same", function (data) {
+        setPlaygame("no")
+        setNote("note1")
+    })
+    socketRef.current.on("yourname", function (data) {
+      if (data[0] != myname)
+        setYourname(data[0])
+      else
+        setYourname(data[1])
     })
     socketRef.current.on("notification", function (data) {
       setNotification(data)
@@ -410,7 +418,10 @@ function App() {
             setWinner(true)
           }
       else 
-        window.location.reload(true)
+        {
+          window.location.reload(true)
+          socketRef.current.emit("reload", [roomname, myname])
+        }
     })
     function send(data) {
       socketRef.current.emit("send", data)
@@ -468,12 +479,19 @@ function App() {
       socketRef.current.emit("joinroom", nameroom)
       
     } 
+    function clicknote(){
+      clickbtn.play()
+      setNote("")
+    }
     return (  
       <div className='box'>
-        
         <form>
-          <h2>{note === "note" ? "Phong day" : ""}</h2>
-          <h2>{note === "note1" ? "Ten da duoc su dung" : ""}</h2>
+        {note == "note" ? <div className='notification'><span class='glowing-txt noti'>Match was full</span>
+          <button className='glowing-btn ok' onMouseEnter={()=> {hoverbtn.play()}} onClick={() => clicknote()}>OK</button>
+        </div> : ""}
+        {note == "note1" ? <div className='notification'><span class='glowing-txt noti'>Username was created</span>
+          <button className='glowing-btn ok' onMouseEnter={()=> {hoverbtn.play()}} onClick={() => clicknote()}>OK</button>
+        </div> : ""}
           <div class="form-control">
             <label for="username"><span class='glowing-txt'>US<span class='faulty-letter'>ER </span>NAME</span></label>
             <input
