@@ -30,12 +30,12 @@ socketIo.on("connection", (socket) => {
       socketIo.to("samename").emit("same", "Username was created")
       checkplayer = 1
     }
-    else if(checkplayer == 2)
-    {
-      socket.join("samename")
-      socketIo.to("samename").emit("same", "Username dosen't null")
-      checkplayer = 1
-    }
+    // else if(checkplayer == 2)
+    // {
+    //   socket.join("samename")
+    //   socketIo.to("samename").emit("same", "Username dosen't null")
+    //   checkplayer = 1
+    // }
     else 
     {
       for(let i=0; i < roomplayer.length ;i=i+3) {
