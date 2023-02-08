@@ -395,7 +395,7 @@ function App() {
     })
     socketRef.current.on("same", function (data) {
         setPlaygame("no")
-        setNote("note1")
+        setNote(data)
     })
     socketRef.current.on("yourname", function (data) {
       if (data[0] != myname)
@@ -489,7 +489,10 @@ function App() {
         {note == "note" ? <div className='notification'><span class='glowing-txt noti'>Match was full</span>
           <button className='glowing-btn ok' onMouseEnter={()=> {hoverbtn.play()}} onClick={() => clicknote()}>OK</button>
         </div> : ""}
-        {note == "note1" ? <div className='notification'><span class='glowing-txt noti'>Username was created</span>
+        {note == "Username was created" ? <div className='notification'><span class='glowing-txt noti'>{note}</span>
+          <button className='glowing-btn ok' onMouseEnter={()=> {hoverbtn.play()}} onClick={() => clicknote()}>OK</button>
+        </div> : ""}
+        {note == "Username dosen't null" ? <div className='notification'><span class='glowing-txt noti'>{note}</span>
           <button className='glowing-btn ok' onMouseEnter={()=> {hoverbtn.play()}} onClick={() => clicknote()}>OK</button>
         </div> : ""}
           <div class="form-control">

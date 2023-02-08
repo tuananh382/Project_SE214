@@ -21,11 +21,19 @@ socketIo.on("connection", (socket) => {
     {
       if(nameplayer[i] == roomname[1])
         checkplayer = 0
+      else if (roomname[1] == "")
+        checkplayer = 2
     }
     if(checkplayer == 0)
     {
       socket.join("samename")
-      socketIo.to("samename").emit("same", "Ten da duoc su dung")
+      socketIo.to("samename").emit("same", "Username was created")
+      checkplayer = 1
+    }
+    else if(checkplayer == 2)
+    {
+      socket.join("samename")
+      socketIo.to("samename").emit("same", "Username dosen't null")
       checkplayer = 1
     }
     else 
@@ -35,7 +43,6 @@ socketIo.on("connection", (socket) => {
           {
             checkroom = 0;
             pos = i
-            break
           }
       }
       //Phong khong ton tai
