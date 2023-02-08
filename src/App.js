@@ -436,7 +436,7 @@ function App() {
         </div>
         <div className='infor'>
           <div className='chair'>
-            <h1 className='roomname'><span class='glowing-txt'>MA<span class='faulty-letter'>TCH</span>{roomname}</span></h1>
+            <h1 className='roomname'><span class='glowing-txt'>MA<span class='faulty-letter'>TCH: </span>{roomname}</span></h1>
             <div className='player'>
               <div className='player1'>
                 <div className='name'>
